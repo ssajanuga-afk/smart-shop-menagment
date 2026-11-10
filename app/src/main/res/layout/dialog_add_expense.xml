@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <EditText
+        android:id="@+id/etDialogExpenseDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Expense Description"
+        android:inputType="text"
+        android:layout_marginBottom="12dp" />
+
+    <EditText
+        android:id="@+id/etDialogExpenseAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Amount ($)"
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="12dp" />
+
+    <EditText
+        android:id="@+id/etDialogExpenseCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Category (e.g. Rent, Utilities, Salary)"
+        android:inputType="text"
+        android:layout_marginBottom="12dp" />
+
+    <EditText
+        android:id="@+id/etDialogExpenseDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Date (yyyy-MM-dd)"
+        android:inputType="date" />
+
+</LinearLayout>

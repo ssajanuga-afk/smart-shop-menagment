@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Customer"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp" />
+
+    <Spinner
+        android:id="@+id/spinnerCheckoutCustomer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Payment Method"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp" />
+
+    <RadioGroup
+        android:id="@+id/rgPaymentMethod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp">
+
+        <RadioButton
+            android:id="@+id/rbCash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Cash" />
+
+        <RadioButton
+            android:id="@+id/rbCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Card" />
+
+        <RadioButton
+            android:id="@+id/rbBank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bank Transfer" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tvCheckoutTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Final Total: $0.00"
+        android:textColor="@color/success"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

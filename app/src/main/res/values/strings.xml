@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Smart Shop Manager</string>
+    <string name="nav_products">Products &amp; API</string>
+    <string name="nav_sales">Sales POS</string>
+    <string name="nav_customers">Customers</string>
+    <string name="nav_expenses">Expenses</string>
+    <string name="nav_reports">Reports &amp; Dashboard</string>
+</resources>
