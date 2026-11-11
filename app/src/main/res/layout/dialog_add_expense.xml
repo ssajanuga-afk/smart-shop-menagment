@@ -2,38 +2,64 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/card_background"
     android:orientation="vertical"
     android:padding="20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:text="💵 Expense Details"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/etDialogExpenseDesc"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/edit_text_bg"
         android:hint="Expense Description"
         android:inputType="text"
-        android:layout_marginBottom="12dp" />
+        android:paddingHorizontal="12dp"
+        android:textColor="@color/text_primary"
+        android:textSize="14sp" />
 
     <EditText
         android:id="@+id/etDialogExpenseAmount"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/edit_text_bg"
         android:hint="Amount ($)"
         android:inputType="numberDecimal"
-        android:layout_marginBottom="12dp" />
+        android:paddingHorizontal="12dp"
+        android:textColor="@color/text_primary"
+        android:textSize="14sp" />
 
     <EditText
         android:id="@+id/etDialogExpenseCategory"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Category (e.g. Rent, Utilities, Salary)"
+        android:layout_height="46dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/edit_text_bg"
+        android:hint="Category (e.g. Rent, Utilities)"
         android:inputType="text"
-        android:layout_marginBottom="12dp" />
+        android:paddingHorizontal="12dp"
+        android:textColor="@color/text_primary"
+        android:textSize="14sp" />
 
     <EditText
         android:id="@+id/etDialogExpenseDate"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
+        android:background="@drawable/edit_text_bg"
         android:hint="Date (yyyy-MM-dd)"
-        android:inputType="date" />
+        android:inputType="date"
+        android:paddingHorizontal="12dp"
+        android:textColor="@color/text_primary"
+        android:textSize="14sp" />
 
 </LinearLayout>

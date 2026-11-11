@@ -9,6 +9,7 @@ public class Product {
     private int quantity;
     private String categoryName; // For UI convenience
     private String imageUrl; // For API products
+    private boolean active = true;
 
     public Product(int productId, String name, int categoryId, double price, double costPrice, int quantity) {
         this.productId = productId;
@@ -17,6 +18,7 @@ public class Product {
         this.price = price;
         this.costPrice = costPrice;
         this.quantity = quantity;
+        this.active = true;
     }
 
     public Product(String name, int categoryId, double price, double costPrice, int quantity) {
@@ -99,5 +101,13 @@ public class Product {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

@@ -11,15 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartshopmanager.R;
+import com.example.smartshopmanager.auth.RoleManager;
 import com.example.smartshopmanager.models.Product;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ApiProductAdapter extends RecyclerView.Adapter<ApiProductAdapter.ApiViewHolder> {
 
-    private Context context;
-    private List<Product> apiProducts;
-    private OnImportListener listener;
+    private final Context context;
+    private final List<Product> allApiProducts;
+    private List<Product> filteredApiProducts;
+    private final OnImportListener listener;
 
     public interface OnImportListener {
         void onImportClick(Product product);
@@ -27,8 +31,26 @@ public class ApiProductAdapter extends RecyclerView.Adapter<ApiProductAdapter.Ap
 
     public ApiProductAdapter(Context context, List<Product> apiProducts, OnImportListener listener) {
         this.context = context;
-        this.apiProducts = apiProducts;
+        this.allApiProducts = new ArrayList<>(apiProducts);
+        this.filteredApiProducts = new ArrayList<>(apiProducts);
         this.listener = listener;
+    }
+
+    public void filter(String keyword) {
+        filteredApiProducts = new ArrayList<>();
+        if (keyword == null || keyword.trim().isEmpty()) {
+            filteredApiProducts.addAll(allApiProducts);
+        } else {
+            String query = keyword.trim().toLowerCase(Locale.ROOT);
+            for (Product p : allApiProducts) {
+                String name = p.getName() != null ? p.getName().toLowerCase(Locale.ROOT) : "";
+                String cat = p.getCategoryName() != null ? p.getCategoryName().toLowerCase(Locale.ROOT) : "";
+                if (name.contains(query) || cat.contains(query)) {
+                    filteredApiProducts.add(p);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -40,11 +62,13 @@ public class ApiProductAdapter extends RecyclerView.Adapter<ApiProductAdapter.Ap
 
     @Override
     public void onBindViewHolder(@NonNull ApiViewHolder holder, int position) {
-        Product product = apiProducts.get(position);
+        Product product = filteredApiProducts.get(position);
         holder.tvName.setText(product.getName());
         holder.tvCategory.setText("Category: " + product.getCategoryName());
-        holder.tvPrice.setText(String.format("$%.2f", product.getPrice()));
+        holder.tvPrice.setText(String.format(Locale.getDefault(), "$%.2f", product.getPrice()));
 
+        boolean canImport = RoleManager.canImportApiProducts(RoleManager.getCurrentRole(context));
+        holder.btnImport.setVisibility(canImport ? View.VISIBLE : View.GONE);
         holder.btnImport.setOnClickListener(v -> {
             if (listener != null) listener.onImportClick(product);
         });
@@ -52,7 +76,7 @@ public class ApiProductAdapter extends RecyclerView.Adapter<ApiProductAdapter.Ap
 
     @Override
     public int getItemCount() {
-        return apiProducts.size();
+        return filteredApiProducts.size();
     }
 
     public static class ApiViewHolder extends RecyclerView.ViewHolder {

@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#1565C0</color>
-    <color name="primary_dark">#0D47A1</color>
-    <color name="accent">#FF6F00</color>
-    <color name="background">#F5F5F5</color>
+    <!-- Botanical Plant Shop Color Palette -->
+    <color name="primary">#0F382C</color>
+    <color name="primary_dark">#08271E</color>
+    <color name="primary_light">#2D6A4F</color>
+    <color name="accent">#40916C</color>
+    <color name="accent_warm">#E07A5F</color>
+
+    <!-- Surfaces & Backgrounds -->
+    <color name="background">#F4F7F5</color>
     <color name="card_background">#FFFFFF</color>
-    <color name="success">#2E7D32</color>
-    <color name="error">#C62828</color>
+    <color name="mint_tint">#E8F5E9</color>
+    <color name="mint_badge">#D8F3DC</color>
+    <color name="input_background">#F8FAF9</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#112A20</color>
+    <color name="text_secondary">#526E60</color>
+    <color name="text_muted">#8A9A90</color>
+    <color name="white">#FFFFFF</color>
+
+    <!-- Status & Indicators -->
+    <color name="success">#2D6A4F</color>
+    <color name="error">#E63946</color>
+    <color name="error_tint">#FFEBEE</color>
+    <color name="warning">#F4A261</color>
 </resources>

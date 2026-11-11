@@ -8,18 +8,21 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartshopmanager.R;
+import com.example.smartshopmanager.auth.RoleManager;
 import com.example.smartshopmanager.models.Product;
 
 import java.util.List;
+import java.util.Locale;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
-    private Context context;
+    private final Context context;
     private List<Product> productList;
-    private OnProductListener listener;
+    private final OnProductListener listener;
 
     public interface OnProductListener {
         void onEditClick(Product product);
@@ -49,8 +52,18 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         Product product = productList.get(position);
         holder.tvName.setText(product.getName());
         holder.tvCategory.setText("Category: " + (product.getCategoryName() != null ? product.getCategoryName() : "General"));
-        holder.tvPrice.setText(String.format("$%.2f", product.getPrice()));
+        holder.tvPrice.setText(String.format(Locale.getDefault(), "$%.2f", product.getPrice()));
         holder.tvStock.setText("Stock: " + product.getQuantity());
+
+        int stockColor = product.getQuantity() <= 5 ? R.color.error : R.color.text_secondary;
+        holder.tvStock.setTextColor(ContextCompat.getColor(context, stockColor));
+
+        String currentRole = RoleManager.getCurrentRole(context);
+        boolean canEdit = RoleManager.canAddEditProducts(currentRole);
+        boolean canDelete = RoleManager.canDeleteItems(currentRole);
+
+        holder.btnEdit.setVisibility(canEdit ? View.VISIBLE : View.GONE);
+        holder.btnDelete.setVisibility(canDelete ? View.VISIBLE : View.GONE);
 
         holder.btnEdit.setOnClickListener(v -> {
             if (listener != null) listener.onEditClick(product);

@@ -6,20 +6,31 @@ public class Expense {
     private double amount;
     private String category;
     private String date; // yyyy-MM-dd
+    private String recordedBy;
 
     public Expense(int expenseId, String description, double amount, String category, String date) {
+        this(expenseId, description, amount, category, date, "");
+    }
+
+    public Expense(int expenseId, String description, double amount, String category, String date, String recordedBy) {
         this.expenseId = expenseId;
         this.description = description;
         this.amount = amount;
         this.category = category;
         this.date = date;
+        this.recordedBy = recordedBy;
     }
 
     public Expense(String description, double amount, String category, String date) {
+        this(description, amount, category, date, "");
+    }
+
+    public Expense(String description, double amount, String category, String date, String recordedBy) {
         this.description = description;
         this.amount = amount;
         this.category = category;
         this.date = date;
+        this.recordedBy = recordedBy;
     }
 
     public int getExpenseId() {
@@ -60,5 +71,13 @@ public class Expense {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getRecordedBy() {
+        return recordedBy;
+    }
+
+    public void setRecordedBy(String recordedBy) {
+        this.recordedBy = recordedBy;
     }
 }

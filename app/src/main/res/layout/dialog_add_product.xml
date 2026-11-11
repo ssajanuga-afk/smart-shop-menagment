@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -8,57 +9,86 @@
     <EditText
         android:id="@+id/etDialogProductName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/edit_text_bg"
         android:hint="Product Name"
         android:inputType="text"
-        android:layout_marginBottom="12dp" />
+        android:paddingHorizontal="14dp"
+        android:textColor="@color/text_primary"
+        android:textSize="14sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:layout_marginBottom="12dp"
-        android:gravity="center_vertical">
+        android:layout_marginBottom="10dp">
 
-        <Spinner
-            android:id="@+id/spinnerDialogCategory"
+        <FrameLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:background="@drawable/edit_text_bg">
 
-        <Button
+            <Spinner
+                android:id="@+id/spinnerDialogCategory"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="8dp" />
+        </FrameLayout>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnDialogAddCategory"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+ Category"
-            android:textSize="12sp"
+            android:layout_height="44dp"
+            android:layout_marginStart="8dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
             android:minHeight="0dp"
             android:minWidth="0dp"
-            android:padding="8dp" />
+            android:paddingHorizontal="10dp"
+            android:text="+ Category"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/primary"
+            app:cornerRadius="10dp" />
 
     </LinearLayout>
 
     <EditText
         android:id="@+id/etDialogProductPrice"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/edit_text_bg"
         android:hint="Selling Price ($)"
         android:inputType="numberDecimal"
-        android:layout_marginBottom="12dp" />
+        android:paddingHorizontal="14dp"
+        android:textColor="@color/text_primary"
+        android:textSize="14sp" />
 
     <EditText
         android:id="@+id/etDialogProductCost"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/edit_text_bg"
         android:hint="Cost Price ($)"
         android:inputType="numberDecimal"
-        android:layout_marginBottom="12dp" />
+        android:paddingHorizontal="14dp"
+        android:textColor="@color/text_primary"
+        android:textSize="14sp" />
 
     <EditText
         android:id="@+id/etDialogProductQty"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
+        android:background="@drawable/edit_text_bg"
         android:hint="Initial Quantity / Stock"
-        android:inputType="number" />
+        android:inputType="number"
+        android:paddingHorizontal="14dp"
+        android:textColor="@color/text_primary"
+        android:textSize="14sp" />
 
 </LinearLayout>

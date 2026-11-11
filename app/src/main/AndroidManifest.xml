@@ -5,21 +5,23 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartShopManager">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".auth.OnboardingActivity"
             android:exported="true">
             <intent-filter>
-                <action android:name="intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <activity android:name=".auth.LoginActivity" android:exported="false" />
+
+        <activity android:name=".MainActivity" android:exported="false" />
+        <activity android:name=".auth.UserManagementActivity" android:exported="false" />
         <activity android:name=".product.ProductActivity" android:exported="false" />
         <activity android:name=".sales.SalesActivity" android:exported="false" />
         <activity android:name=".customer.CustomerActivity" android:exported="false" />

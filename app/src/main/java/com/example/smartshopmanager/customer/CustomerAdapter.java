@@ -11,17 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartshopmanager.R;
+import com.example.smartshopmanager.auth.RoleManager;
 import com.example.smartshopmanager.models.Customer;
 
 import java.util.List;
 
 public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.CustomerViewHolder> {
 
-    private Context context;
+    private final Context context;
     private List<Customer> customerList;
-    private OnCustomerListener listener;
+    private final OnCustomerListener listener;
 
     public interface OnCustomerListener {
+        void onCustomerClick(Customer customer);
         void onEditClick(Customer customer);
         void onDeleteClick(Customer customer);
     }
@@ -51,10 +53,16 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
         holder.tvPhone.setText("Phone: " + (customer.getPhone() != null && !customer.getPhone().isEmpty() ? customer.getPhone() : "N/A"));
         holder.tvEmail.setText("Email: " + (customer.getEmail() != null && !customer.getEmail().isEmpty() ? customer.getEmail() : "N/A"));
 
+        String role = RoleManager.getCurrentRole(context);
+        holder.btnEdit.setVisibility(RoleManager.canAddEditCustomers(role) ? View.VISIBLE : View.GONE);
+        holder.btnDelete.setVisibility(RoleManager.canDeleteItems(role) ? View.VISIBLE : View.GONE);
+
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) listener.onCustomerClick(customer);
+        });
         holder.btnEdit.setOnClickListener(v -> {
             if (listener != null) listener.onEditClick(customer);
         });
-
         holder.btnDelete.setOnClickListener(v -> {
             if (listener != null) listener.onDeleteClick(customer);
         });

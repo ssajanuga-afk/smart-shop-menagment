@@ -14,18 +14,21 @@ import com.example.smartshopmanager.R;
 import com.example.smartshopmanager.models.SaleItem;
 
 import java.util.List;
+import java.util.Locale;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
 
-    private Context context;
-    private List<SaleItem> cartItems;
-    private OnCartRemoveListener listener;
-
-    public interface OnCartRemoveListener {
+    public interface OnCartActionListener {
+        void onIncreaseQty(int position);
+        void onDecreaseQty(int position);
         void onRemoveClick(int position);
     }
 
-    public CartAdapter(Context context, List<SaleItem> cartItems, OnCartRemoveListener listener) {
+    private final Context context;
+    private final List<SaleItem> cartItems;
+    private final OnCartActionListener listener;
+
+    public CartAdapter(Context context, List<SaleItem> cartItems, OnCartActionListener listener) {
         this.context = context;
         this.cartItems = cartItems;
         this.listener = listener;
@@ -42,11 +45,21 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
         SaleItem item = cartItems.get(position);
         holder.tvName.setText(item.getProductName());
-        holder.tvPriceQty.setText(String.format("$%.2f x %d", item.getUnitPrice(), item.getQuantity()));
-        holder.tvTotal.setText(String.format("$%.2f", item.getTotalPrice()));
+        holder.tvPriceEach.setText(String.format(Locale.getDefault(), "$%.2f each", item.getUnitPrice()));
+        holder.tvQty.setText(String.valueOf(item.getQuantity()));
+        holder.tvTotal.setText(String.format(Locale.getDefault(), "$%.2f", item.getTotalPrice()));
 
+        holder.btnIncrease.setOnClickListener(v -> {
+            int pos = holder.getBindingAdapterPosition();
+            if (listener != null && pos != RecyclerView.NO_POSITION) listener.onIncreaseQty(pos);
+        });
+        holder.btnDecrease.setOnClickListener(v -> {
+            int pos = holder.getBindingAdapterPosition();
+            if (listener != null && pos != RecyclerView.NO_POSITION) listener.onDecreaseQty(pos);
+        });
         holder.btnRemove.setOnClickListener(v -> {
-            if (listener != null) listener.onRemoveClick(position);
+            int pos = holder.getBindingAdapterPosition();
+            if (listener != null && pos != RecyclerView.NO_POSITION) listener.onRemoveClick(pos);
         });
     }
 
@@ -56,14 +69,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     }
 
     public static class CartViewHolder extends RecyclerView.ViewHolder {
-        TextView tvName, tvPriceQty, tvTotal;
-        Button btnRemove;
+        TextView tvName, tvPriceEach, tvQty, tvTotal;
+        Button btnIncrease, btnDecrease, btnRemove;
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tvCartProductName);
-            tvPriceQty = itemView.findViewById(R.id.tvCartProductPrice);
+            tvPriceEach = itemView.findViewById(R.id.tvCartProductPrice);
+            tvQty = itemView.findViewById(R.id.tvCartQty);
             tvTotal = itemView.findViewById(R.id.tvCartItemTotal);
+            btnIncrease = itemView.findViewById(R.id.btnIncreaseCartQty);
+            btnDecrease = itemView.findViewById(R.id.btnDecreaseCartQty);
             btnRemove = itemView.findViewById(R.id.btnRemoveCartItem);
         }
     }

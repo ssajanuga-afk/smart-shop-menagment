@@ -13,15 +13,31 @@ import com.example.smartshopmanager.R;
 import com.example.smartshopmanager.models.Sale;
 
 import java.util.List;
+import java.util.Locale;
 
 public class SalesHistoryAdapter extends RecyclerView.Adapter<SalesHistoryAdapter.SaleViewHolder> {
 
-    private Context context;
+    public interface OnSaleClickListener {
+        void onSaleClick(Sale sale);
+    }
+
+    private final Context context;
     private List<Sale> saleList;
+    private OnSaleClickListener listener;
 
     public SalesHistoryAdapter(Context context, List<Sale> saleList) {
+        this(context, saleList, null);
+    }
+
+    public SalesHistoryAdapter(Context context, List<Sale> saleList, OnSaleClickListener listener) {
         this.context = context;
         this.saleList = saleList;
+        this.listener = listener;
+    }
+
+    public void updateList(List<Sale> newList) {
+        this.saleList = newList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -35,9 +51,20 @@ public class SalesHistoryAdapter extends RecyclerView.Adapter<SalesHistoryAdapte
     public void onBindViewHolder(@NonNull SaleViewHolder holder, int position) {
         Sale sale = saleList.get(position);
         holder.tvIdDate.setText("Sale #" + sale.getSaleId() + " - " + sale.getSaleDate());
-        holder.tvCustomer.setText("Customer: " + (sale.getCustomerName() != null ? sale.getCustomerName() : "Walk-in"));
-        holder.tvPayment.setText("Paid via: " + (sale.getPaymentMethod() != null ? sale.getPaymentMethod() : "Cash"));
-        holder.tvTotal.setText(String.format("$%.2f", sale.getTotalAmount()));
+
+        String cust = (sale.getCustomerName() != null && !sale.getCustomerName().isEmpty())
+                ? sale.getCustomerName() : "Walk-in";
+        String cashier = (sale.getCashierName() != null && !sale.getCashierName().isEmpty())
+                ? " • " + sale.getCashierName() : "";
+        holder.tvCustomer.setText("Customer: " + cust + cashier);
+
+        String method = sale.getPaymentMethod() != null ? sale.getPaymentMethod() : "Cash";
+        holder.tvPayment.setText("Paid via: " + method + " • Tap for receipt");
+        holder.tvTotal.setText(String.format(Locale.getDefault(), "$%.2f", sale.getTotalAmount()));
+
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) listener.onSaleClick(sale);
+        });
     }
 
     @Override

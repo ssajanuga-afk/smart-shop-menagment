@@ -11,15 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartshopmanager.R;
+import com.example.smartshopmanager.auth.RoleManager;
 import com.example.smartshopmanager.models.Expense;
 
 import java.util.List;
+import java.util.Locale;
 
 public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseViewHolder> {
 
-    private Context context;
+    private final Context context;
     private List<Expense> expenseList;
-    private OnExpenseListener listener;
+    private final OnExpenseListener listener;
 
     public interface OnExpenseListener {
         void onEditClick(Expense expense);
@@ -30,6 +32,11 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
         this.context = context;
         this.expenseList = expenseList;
         this.listener = listener;
+    }
+
+    public void updateList(List<Expense> newList) {
+        this.expenseList = newList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -44,8 +51,14 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
         Expense expense = expenseList.get(position);
         holder.tvDesc.setText(expense.getDescription());
         holder.tvCategory.setText("Category: " + (expense.getCategory() != null && !expense.getCategory().isEmpty() ? expense.getCategory() : "General"));
-        holder.tvDate.setText("Date: " + expense.getDate());
-        holder.tvAmount.setText(String.format("$%.2f", expense.getAmount()));
+        String recorded = (expense.getRecordedBy() != null && !expense.getRecordedBy().isEmpty())
+                ? " • by " + expense.getRecordedBy() : "";
+        holder.tvDate.setText("Date: " + expense.getDate() + recorded);
+        holder.tvAmount.setText(String.format(Locale.getDefault(), "$%.2f", expense.getAmount()));
+
+        String role = RoleManager.getCurrentRole(context);
+        holder.btnEdit.setVisibility(RoleManager.canManageExpenses(role) ? View.VISIBLE : View.GONE);
+        holder.btnDelete.setVisibility(RoleManager.canDeleteItems(role) ? View.VISIBLE : View.GONE);
 
         holder.btnEdit.setOnClickListener(v -> {
             if (listener != null) listener.onEditClick(expense);

@@ -4,15 +4,21 @@ public class SaleItem {
     private int itemId;
     private int saleId;
     private int productId;
-    private String productName; // For cart / display
+    private String productName; // For cart / receipt snapshot
     private int quantity;
     private double unitPrice;
+    private double costPrice;
 
     public SaleItem(int productId, String productName, int quantity, double unitPrice) {
+        this(productId, productName, quantity, unitPrice, 0.0);
+    }
+
+    public SaleItem(int productId, String productName, int quantity, double unitPrice, double costPrice) {
         this.productId = productId;
         this.productName = productName;
         this.quantity = quantity;
         this.unitPrice = unitPrice;
+        this.costPrice = costPrice;
     }
 
     public SaleItem(int itemId, int saleId, int productId, int quantity, double unitPrice) {
@@ -69,6 +75,14 @@ public class SaleItem {
 
     public void setUnitPrice(double unitPrice) {
         this.unitPrice = unitPrice;
+    }
+
+    public double getCostPrice() {
+        return costPrice;
+    }
+
+    public void setCostPrice(double costPrice) {
+        this.costPrice = costPrice;
     }
 
     public double getTotalPrice() {

@@ -5,5 +5,19 @@
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorSecondary">@color/accent</item>
         <item name="android:windowBackground">@color/background</item>
+        <item name="colorSurface">@color/card_background</item>
+
+        <!-- Rounded Modern Dialogs -->
+        <item name="alertDialogTheme">@style/RoundedAlertDialogTheme</item>
+        <item name="materialAlertDialogTheme">@style/RoundedAlertDialogTheme</item>
+    </style>
+
+    <style name="RoundedAlertDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.App.MediumComponent</item>
+        <item name="android:background">@drawable/dialog_bg</item>
+    </style>
+
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSize">20dp</item>
     </style>
 </resources>

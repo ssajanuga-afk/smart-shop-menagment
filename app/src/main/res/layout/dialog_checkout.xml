@@ -2,56 +2,68 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/card_background"
     android:orientation="vertical"
     android:padding="20dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
         android:text="Select Customer"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="4dp" />
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp"
+        android:textStyle="bold" />
 
-    <Spinner
-        android:id="@+id/spinnerCheckoutCustomer"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp" />
+        android:layout_height="46dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/edit_text_bg">
+
+        <Spinner
+            android:id="@+id/spinnerCheckoutCustomer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="8dp" />
+    </FrameLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
         android:text="Payment Method"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="4dp" />
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp"
+        android:textStyle="bold" />
 
     <RadioGroup
         android:id="@+id/rgPaymentMethod"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical">
 
         <RadioButton
             android:id="@+id/rbCash"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="Cash" />
+            android:text="💵 Cash"
+            android:textColor="@color/text_primary" />
 
         <RadioButton
             android:id="@+id/rbCard"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Card" />
+            android:text="💳 Card"
+            android:textColor="@color/text_primary" />
 
         <RadioButton
             android:id="@+id/rbBank"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bank Transfer" />
+            android:text="🏦 Bank Transfer"
+            android:textColor="@color/text_primary" />
 
     </RadioGroup>
 
@@ -59,9 +71,11 @@
         android:id="@+id/tvCheckoutTotal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_bg"
+        android:padding="12dp"
         android:text="Final Total: $0.00"
         android:textColor="@color/success"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
 </LinearLayout>
